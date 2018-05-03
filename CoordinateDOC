@@ -1,0 +1,66 @@
+public class Coordinate {
+
+	private int x; // x coordinate of ship
+	private int y; // y coordinate of ship
+	private int size; // battleship size
+	private boolean damage = false; // has the ship taken a hit?
+
+	/**
+	 * Constructor for coordinate class
+	 * 
+	 * @param x
+	 *            - x coordinate
+	 * @param y
+	 *            - y coordinate
+	 * @param size
+	 *            - size of ship
+	 */
+	public Coordinate(int x, int y, int size) {
+		this.x = x;
+		this.y = y;
+		this.size = size;
+	}
+
+	/**
+	 * Getter method for x coordinate of the ship
+	 * 
+	 * @return x: the x coordinate of the ship
+	 */
+	public int getX() {
+		return x;
+	}
+
+	/**
+	 * Getter method for y coordinate of the ship
+	 * 
+	 * @return y: the y coordinate of the ship
+	 */
+	public int getY() {
+		return y;
+	}
+
+	/**
+	 * Getter method for size of the ship
+	 * 
+	 * @return getSize: the size of the ship
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * Checks if ship is damaged or not
+	 * 
+	 * @return damage: boolean if the ship has been hit
+	 */
+	public boolean isDamaged() {
+		return damage;
+	}
+
+	/**
+	 * Setter method for ship damage the damage will be set to true has been hit
+	 */
+	public void setDamage(boolean status) {
+		damage = status;
+	}
+}
