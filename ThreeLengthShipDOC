@@ -1,0 +1,55 @@
+/**
+ * ThreeLengthship.Java
+ *
+ * Coordinate objects declared
+ */
+public class ThreeLengthShip extends Ship {
+	Coordinate c1;
+	Coordinate c2;
+	Coordinate c3;
+
+	/**
+	 * Constructor to initialize the Coordinate objects
+	 * 
+	 * @param c1
+	 *            Coordinate object
+	 * @param c2
+	 *            Coordinate object
+	 * @param c3
+	 *            Coordinate object
+	 */
+	public ThreeLengthShip(Coordinate c1, Coordinate c2, Coordinate c3) {
+		this.c1 = c1;
+		this.c2 = c2;
+		this.c3 = c3;
+	}
+
+	/**
+	 * Boolean method to see if guessed coordinate hits a ship
+	 * 
+	 * @return true if hit, false if not
+	 */
+	@Override
+	public boolean isDamaged() {
+		if ((c1.isDamaged() || c2.isDamaged() || c3.isDamaged()) && (!isAlive())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Boolean method to check to see if a ship has been hit on all coordinates
+	 * 
+	 * @return true if all coordinates hit, false if not
+	 */
+	@Override
+	public boolean isAlive() {
+		if (c1.isDamaged() && c2.isDamaged() && c3.isDamaged()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}
