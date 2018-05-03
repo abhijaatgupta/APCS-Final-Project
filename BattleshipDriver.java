@@ -35,6 +35,44 @@ public class BattleshipDriver extends ShipSetup {
 	}
 
 	protected static int shipChoice;
+	
+        //NEW METHOD
+	public String updateStatus(ArrayList<Ship> arr, int low, int high) {
+		int damageCount = 0;
+		int aliveCount = 0;
+		int deadCount = 0;
+		low = 0;
+		high = arr.size() - 1;
+		String s = "";
+		if(low > high) {
+			s += "Alive: " + aliveCount + "\n" + "Dead: " + deadCount + "\n" + "Damaged: " + damageCount + "\n";
+			return s;
+		}
+		else {
+			if(arr.get(low).isAlive()) {
+				aliveCount++;
+			}
+			if(arr.get(low).isDamaged()) {
+				damageCount++;
+			}
+			if(!arr.get(low).isDamaged()) {
+				deadCount++;
+			}
+			if(arr.get(high).isAlive()) {
+				aliveCount++;
+			}
+			if(arr.get(high).isDamaged()) {
+				damageCount++;
+			}
+			if(!arr.get(high).isDamaged()) {
+				deadCount++;
+			}
+			
+			return updateStatus(arr, ++low, --high);
+		}
+		
+		
+	}
 
 	public static void main(String[] args) {
 	}
