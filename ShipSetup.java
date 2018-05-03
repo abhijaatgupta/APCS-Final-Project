@@ -1,7 +1,8 @@
 import java.util.*;
 
 public class ShipSetup extends Coordinate {
-
+	public static ArrayList<Ship> compArray = new <Ship>ArrayList(); //NEW
+	public static ArrayList<Ship> humArray = new <Ship>ArrayList();  //NEW
 	public ShipSetup(int x, int y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
@@ -24,6 +25,7 @@ public class ShipSetup extends Coordinate {
 		} else if (size == 4) {
 			compShip = new FourLengthShip(c1, c2, c3, c4);
 		}
+		compArray.add(compShip);//NEW
 		return compShip;
 
 	}
@@ -55,6 +57,7 @@ public class ShipSetup extends Coordinate {
 			}
 		}
 		TwoLengthShip ship = new TwoLengthShip(c1, c2);
+		humArray.add(ship);//NEW
 		return ship;
 	}
 
@@ -100,6 +103,7 @@ public class ShipSetup extends Coordinate {
 		}
 
 		ThreeLengthShip ship = new ThreeLengthShip(c1, c2, c3);
+		humArray.add(ship); //NEW
 		return ship;
 	}
 
@@ -162,6 +166,7 @@ public class ShipSetup extends Coordinate {
 		}
 
 		FourLengthShip ship = new FourLengthShip(c1, c2, c3, c4);
+		humArray.add(ship); //NEW
 		return ship;
 	}
 }
