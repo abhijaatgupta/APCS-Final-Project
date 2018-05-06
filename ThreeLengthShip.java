@@ -27,5 +27,17 @@ public class ThreeLengthShip extends Ship {
 			return false;
 		}
 	}
+	public int getSize() {
+		return 3;
+	}
+	public Coordinate getC1() {
+		return c1;
+	}
+	public Coordinate getC2() {
+		return c2;
+	}
+	public Coordinate getC3() {
+		return c3;
+	}
 
 }
