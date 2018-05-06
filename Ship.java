@@ -8,5 +8,7 @@ public abstract class Ship {
 	
 	public abstract boolean isDamaged();
 	public abstract boolean isAlive();
+	public abstract int getSize();
+	
 	
 }
