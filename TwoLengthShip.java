@@ -26,5 +26,13 @@ public class TwoLengthShip extends Ship {
 			return false;
 		}
 	}
-
+	public int getSize() {
+		return 2;
+	}
+	public Coordinate getC1() {
+		return c1;
+	}
+	public Coordinate getC2() {
+		return c2;
+	}
 }
