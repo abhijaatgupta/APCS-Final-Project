@@ -9,7 +9,13 @@ public class BattleshipDriver extends ShipSetup {
 
 	Scanner scan = new Scanner(System.in);
 
-	public String game() {
+	public void game() {
+		ArrayList<Integer> xPoints = new <Integer>ArrayList();
+		ArrayList<Integer> yPoints = new <Integer>ArrayList();
+		for (int i = 0; i > 8; i++) {
+			xPoints.add(i);
+			yPoints.add(i);
+		}
 		Ship ship = compArray.get(0);
 		Ship ship2 = compArray.get(1);
 		Ship ship3 = compArray.get(2);
@@ -17,28 +23,23 @@ public class BattleshipDriver extends ShipSetup {
 		System.out.println("The game will be played on an 8 by 8" + " field. 0-7 on the x-axis and 0-7 on the y-axis.");
 		System.out.println("Select how big your battleship is: 2,3,4?");
 		int size = scan.nextInt();
-		while(size != 2 || size != 3 || size != 4) {
+		while (size != 2 || size != 3 || size != 4) {
 			System.out.println("Error! Ships can only be between sizes 2-4");
 			size = scan.nextInt();
 		}
 		System.out.println("Now pick coordinates to place your ship.");
-		if(size == 2) {
+		if (size == 2) {
 			humanSetupFor2Ship();
 			computer();
-		}
-		else if(size == 3) {
+		} else if (size == 3) {
 			humanSetupFor3Ship();
 			computer();
+		} else if (size == 4) {
+			humanSetupFor4Ship(); 
 		}
-		else if(size == 4) {
-			humanSetupFor4Ship();
-			computer();
-		}
-		while(ship.isAlive() == true) {
-			ArrayList<Integer> xPoints = new <Integer>ArrayList();
-			ArrayList<Integer> yPoints = new <Integer>ArrayList();
+		while (ship.isAlive() == true) {
 			
-			}
+		}
 	}
 
 	protected static int shipChoice;
