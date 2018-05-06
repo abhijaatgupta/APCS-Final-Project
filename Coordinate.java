@@ -44,4 +44,17 @@ public class Coordinate {
 	public void setDamage(boolean status) {
 		damage = status;
 	}
+	/**
+	 * Checks if two coordinates are equal
+	 * @param c1 - coordinate being passed in
+	 * @return true if coordinates are equal, and false is coordinates are not equal
+	 */
+	public boolean equals(Coordinate c) {
+		if(this.getX() == c.getX() && this.getY() == c.getY()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
