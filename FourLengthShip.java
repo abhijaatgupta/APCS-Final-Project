@@ -29,5 +29,19 @@ public class FourLengthShip extends Ship {
 			return false;
 		}
 	}
-
+	public int getSize() {
+		return 4;
+	}
+	public Coordinate getC1() {
+		return c1;
+	}
+	public Coordinate getC2() {
+		return c2;
+	}
+	public Coordinate getC3() {
+		return c3;
+	}
+	public Coordinate getC4() {
+		return c4;
+	}
 }
