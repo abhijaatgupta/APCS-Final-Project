@@ -46,22 +46,31 @@ public class BattleshipDriver extends ShipSetup {
 		System.out.println("Now pick coordinates to place your ship.");
 		if (size1 == 2) {
 			humanSetupFor2Ship();
+		}
 			if (size2 == 2) {
 				humanSetupFor2Ship();
+			}
 				if (size3 == 2) {
 					humanSetupFor2Ship();
+				}
 					if (size1 == 3) {
 						humanSetupFor3Ship();
+					}
 						if (size2 == 3) {
 							humanSetupFor3Ship();
+						}
 							if (size3 == 3) {
 								humanSetupFor3Ship();
+							}
 								if (size1 == 4) {
 									humanSetupFor4Ship();
+								}
 									if (size2 == 4) {
 										humanSetupFor4Ship();
+									}
 										if (size3 == 4) {
 											humanSetupFor4Ship();
+										}
 											while (isGame == false) {
 												Ship humShip1 = humArray.get(0);
 												Ship humShip2 = humArray.get(1);
@@ -96,16 +105,7 @@ public class BattleshipDriver extends ShipSetup {
 												}
 											}
 										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
+									
 	protected static int shipChoice;
 
 	// NEW METHOD
