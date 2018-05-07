@@ -1,8 +1,9 @@
 import java.util.*;
 
 public class ShipSetup extends Coordinate {
-	public static ArrayList<Ship> compArray = new <Ship>ArrayList(); //NEW
-	public static ArrayList<Ship> humArray = new <Ship>ArrayList();  //NEW
+	public static ArrayList<Ship> compArray = new <Ship>ArrayList(); // NEW
+	public static ArrayList<Ship> humArray = new <Ship>ArrayList(); // NEW
+
 	public ShipSetup(int x, int y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
@@ -10,24 +11,113 @@ public class ShipSetup extends Coordinate {
 
 	boolean[][] board = new boolean[8][8];
 
-	public static Ship computer() {
+	public static void computer() {
 		Ship compShip = null;
 		Random rand = new Random();
-		int size = rand.nextInt(3) + 2;
-		Coordinate c1 = new Coordinate(rand.nextInt(8), rand.nextInt(8));
-		Coordinate c2 = new Coordinate(rand.nextInt(8), rand.nextInt(8));
-		Coordinate c3 = new Coordinate(rand.nextInt(8), rand.nextInt(8));
-		Coordinate c4 = new Coordinate(rand.nextInt(8), rand.nextInt(8));
-		if (size == 2) {
-			compShip = new TwoLengthShip(c1, c2);
-		} else if (size == 3) {
-			compShip = new ThreeLengthShip(c1, c2, c3);
-		} else if (size == 4) {
-			compShip = new FourLengthShip(c1, c2, c3, c4);
-		}
-		compArray.add(compShip);//NEW
-		return compShip;
+		int i = 0;
+		boolean repeat = false;
+		while (i < 3) {
+			int size = rand.nextInt(3) + 2;
+			int coin = rand.nextInt(2);
+			int xcoord;
+			int ycoord;
+			if (coin == 1) {
+				xcoord = rand.nextInt(8);
+				ycoord = rand.nextInt(8 - size);
+			} else {
+				xcoord = rand.nextInt(8 - size);
+				ycoord = rand.nextInt(8);
+			}
+			Coordinate c1;
+			Coordinate c2;
+			Coordinate c3;
+			Coordinate c4;
+			if (coin == 1) {
+				c1 = new Coordinate(xcoord, ycoord);
+				c2 = new Coordinate(xcoord, ycoord + 1);
+				c3 = new Coordinate(xcoord, ycoord + 2);
+				c4 = new Coordinate(xcoord, ycoord + 3);
+			} else {
+				c1 = new Coordinate(xcoord, ycoord);
+				c2 = new Coordinate(xcoord + 1, ycoord);
+				c3 = new Coordinate(xcoord + 2, ycoord);
+				c4 = new Coordinate(xcoord + 3, ycoord);
+			}
+			if (size == 2) {
+				compShip = new TwoLengthShip(c1, c2);
+				for (int j = 0; j < compArray.size(); j++) {
+					if (size == compArray.get(j).getSize()) {
+						Coordinate compShipC1  = (((TwoLengthShip) compShip).getC1());
+						Coordinate arrayShipC1 = (((TwoLengthShip) compArray.get(j)).getC1());
+						Coordinate compShipC2  = (((TwoLengthShip) compShip).getC2());
+						Coordinate arrayShipC2 = (((TwoLengthShip) compArray.get(j)).getC2());
+						if (compShipC1.equals(arrayShipC1) && compShipC2.equals(arrayShipC2)) {
+							 repeat = true;
+							 break;
+						} else {
+							continue;
+						}
+					}
+				}
+				
+				if(!repeat) {
+					compArray.add(compShip);
+				}
 
+			} else if (size == 3) {
+				compShip = new ThreeLengthShip(c1, c2, c3);
+				for (int j = 0; j < compArray.size(); j++) {
+					if (size == compArray.get(j).getSize()) {
+						Coordinate compShipC1  = (((ThreeLengthShip) compShip).getC1());
+						Coordinate arrayShipC1 = (((ThreeLengthShip) compArray.get(j)).getC1());
+						Coordinate compShipC2  = (((ThreeLengthShip) compShip).getC2());
+						Coordinate arrayShipC2 = (((ThreeLengthShip) compArray.get(j)).getC2());
+						Coordinate compShipC3  = (((ThreeLengthShip) compShip).getC3());
+						Coordinate arrayShipC3 = (((ThreeLengthShip) compArray.get(j)).getC3());
+						if (compShipC1.equals(arrayShipC1) && compShipC2.equals(arrayShipC2) && compShipC3.equals(arrayShipC3)) {
+							 repeat = true;
+							 break;
+						} else {
+							continue;
+						}
+					}
+				}
+				
+				if(!repeat) {
+					compArray.add(compShip);
+				}
+			} else if (size == 4) {
+				compShip = new FourLengthShip(c1, c2, c3, c4);
+				for (int j = 0; j < compArray.size(); j++) {
+					if (size == compArray.get(j).getSize()) {
+						Coordinate compShipC1  = (((FourLengthShip) compShip).getC1());
+						Coordinate arrayShipC1 = (((FourLengthShip) compArray.get(j)).getC1());
+						Coordinate compShipC2  = (((FourLengthShip) compShip).getC2());
+						Coordinate arrayShipC2 = (((FourLengthShip) compArray.get(j)).getC2());
+						Coordinate compShipC3  = (((FourLengthShip) compShip).getC3());
+						Coordinate arrayShipC3 = (((FourLengthShip) compArray.get(j)).getC3());
+						Coordinate compShipC4  = (((FourLengthShip) compShip).getC4());
+						Coordinate arrayShipC4 = (((FourLengthShip) compArray.get(j)).getC4());
+						if (compShipC1.equals(arrayShipC1) && compShipC2.equals(arrayShipC2) && compShipC3.equals(arrayShipC3) && compShipC4.equals(arrayShipC4)) {
+							 repeat = true;
+							 break;
+						} else {
+							continue;
+						}
+					}
+				}
+				
+				if(!repeat) {
+					compArray.add(compShip);
+				}
+			}
+			if(!repeat) {
+				i++;
+			}
+			else {
+				i = i + 0;
+			}
+		}
 	}
 
 	public static Ship humanSetupFor2Ship() {
@@ -57,7 +147,7 @@ public class ShipSetup extends Coordinate {
 			}
 		}
 		TwoLengthShip ship = new TwoLengthShip(c1, c2);
-		humArray.add(ship);//NEW
+		humArray.add(ship);// NEW
 		return ship;
 	}
 
@@ -103,7 +193,7 @@ public class ShipSetup extends Coordinate {
 		}
 
 		ThreeLengthShip ship = new ThreeLengthShip(c1, c2, c3);
-		humArray.add(ship); //NEW
+		humArray.add(ship); // NEW
 		return ship;
 	}
 
@@ -166,7 +256,7 @@ public class ShipSetup extends Coordinate {
 		}
 
 		FourLengthShip ship = new FourLengthShip(c1, c2, c3, c4);
-		humArray.add(ship); //NEW
+		humArray.add(ship); // NEW
 		return ship;
 	}
 }
