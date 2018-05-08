@@ -1,7 +1,6 @@
 /**
  * Abstract class to set a template to make a ship Two boolean variables to
  * check if the ship is hit or sunk
- *
  */
 public abstract class Ship {
 	private boolean isDamaged;
@@ -10,23 +9,29 @@ public abstract class Ship {
 	/**
 	 * Constructor to ship class
 	 */
-
 	public Ship() {
 
 	}
 
 	/**
-	 * Method to see if the ship is hit
+	 * Method to see if ship is hit
 	 * 
 	 * @return true if hit, false if not
 	 */
 	public abstract boolean isDamaged();
 
 	/**
-	 * Method to see if a ship has sunk
+	 * Method to see if ship has sunk
 	 * 
-	 * @return true if sunk, false if not
+	 * @return true if sunken, false if not
 	 */
 	public abstract boolean isAlive();
+
+	/**
+	 * Returns size of ship
+	 * 
+	 * @return ship size
+	 */
+	public abstract int getSize();
 
 }
