@@ -15,6 +15,7 @@ public class ShipSetup extends Coordinate {
 		Ship compShip = null;
 		Random rand = new Random();
 		int i = 0;
+		boolean repeat = false;
 		while (i < 3) {
 			int size = rand.nextInt(3) + 2;
 			int coin = rand.nextInt(2);
@@ -46,29 +47,82 @@ public class ShipSetup extends Coordinate {
 				compShip = new TwoLengthShip(c1, c2);
 				for (int j = 0; j < compArray.size(); j++) {
 					if (size == compArray.get(j).getSize()) {
-						//RANDOM CASTING SHIT TO TEST IF COORDINATES ARE EQUAL
-						if ((((TwoLengthShip) compShip).getC1()).equals((((TwoLengthShip) compArray.get(j)).getC1()))
-								&& (((TwoLengthShip) compShip).getC2())
-										.equals((((TwoLengthShip) compArray.get(j)).getC2()))) {
-							compArray.add(compShip);
+						Coordinate compShipC1  = (((TwoLengthShip) compShip).getC1());
+						Coordinate arrayShipC1 = (((TwoLengthShip) compArray.get(j)).getC1());
+						Coordinate compShipC2  = (((TwoLengthShip) compShip).getC2());
+						Coordinate arrayShipC2 = (((TwoLengthShip) compArray.get(j)).getC2());
+						if (compShipC1.equals(arrayShipC1) || compShipC2.equals(arrayShipC2)) {
+							 repeat = true;
+							 break;
 						} else {
 							continue;
 						}
 					}
 				}
+				
+				if(!repeat) {
+					compArray.add(compShip);
+				}
 
 			} else if (size == 3) {
 				compShip = new ThreeLengthShip(c1, c2, c3);
+				for (int j = 0; j < compArray.size(); j++) {
+					if (size == compArray.get(j).getSize()) {
+						Coordinate compShipC1  = (((ThreeLengthShip) compShip).getC1());
+						Coordinate arrayShipC1 = (((ThreeLengthShip) compArray.get(j)).getC1());
+						Coordinate compShipC2  = (((ThreeLengthShip) compShip).getC2());
+						Coordinate arrayShipC2 = (((ThreeLengthShip) compArray.get(j)).getC2());
+						Coordinate compShipC3  = (((ThreeLengthShip) compShip).getC3());
+						Coordinate arrayShipC3 = (((ThreeLengthShip) compArray.get(j)).getC3());
+						if (compShipC1.equals(arrayShipC1) || compShipC2.equals(arrayShipC2) || compShipC3.equals(arrayShipC3)) {
+							 repeat = true;
+							 break;
+						} else {
+							continue;
+						}
+					}
+				}
+				
+				if(!repeat) {
+					compArray.add(compShip);
+				}
 			} else if (size == 4) {
 				compShip = new FourLengthShip(c1, c2, c3, c4);
+				for (int j = 0; j < compArray.size(); j++) {
+					if (size == compArray.get(j).getSize()) {
+						Coordinate compShipC1  = (((FourLengthShip) compShip).getC1());
+						Coordinate arrayShipC1 = (((FourLengthShip) compArray.get(j)).getC1());
+						Coordinate compShipC2  = (((FourLengthShip) compShip).getC2());
+						Coordinate arrayShipC2 = (((FourLengthShip) compArray.get(j)).getC2());
+						Coordinate compShipC3  = (((FourLengthShip) compShip).getC3());
+						Coordinate arrayShipC3 = (((FourLengthShip) compArray.get(j)).getC3());
+						Coordinate compShipC4  = (((FourLengthShip) compShip).getC4());
+						Coordinate arrayShipC4 = (((FourLengthShip) compArray.get(j)).getC4());
+						if (compShipC1.equals(arrayShipC1) || compShipC2.equals(arrayShipC2) || compShipC3.equals(arrayShipC3) || compShipC4.equals(arrayShipC4)) {
+							 repeat = true;
+							 break;
+						} else {
+							continue;
+						}
+					}
+				}
+				
+				if(!repeat) {
+					compArray.add(compShip);
+				}
 			}
-			// NEW
-			i++;
+			if(!repeat) {
+				i++;
+			}
+			else {
+				i = i + 0;
+			}
 		}
 	}
 
-	public static Ship humanSetupFor2Ship() {
+	public static void humanSetupFor2Ship() {
 		Scanner scan = new Scanner(System.in);
+		boolean repeat = false;
 		int xPoint;
 		int yPoint;
 		Coordinate c1 = new Coordinate(0, 0);
@@ -94,11 +148,37 @@ public class ShipSetup extends Coordinate {
 			}
 		}
 		TwoLengthShip ship = new TwoLengthShip(c1, c2);
-		humArray.add(ship);// NEW
-		return ship;
+		int size = ship.getSize();
+		for (int j = 0; j < humArray.size(); j++) {
+			if (size == compArray.get(j).getSize()) {
+				Coordinate humShipC1  = (((TwoLengthShip) ship).getC1());
+				Coordinate arrayShipC1 = (((TwoLengthShip) humArray.get(j)).getC1());
+				Coordinate humShipC2  = (((TwoLengthShip) ship).getC2());
+				Coordinate arrayShipC2 = (((TwoLengthShip) humArray.get(j)).getC2());
+				if (humShipC1.equals(arrayShipC1) || humShipC2.equals(arrayShipC2)) {
+					 repeat = true;
+					 break;
+				} else {
+					repeat = false;
+					continue;
+				}
+			}
+		}
+		
+		if(!repeat) {
+			humArray.add(ship);
+		}
+		else {
+			while(repeat) {
+				System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
+				humanSetupFor2Ship();
+			}
+		} 
+		
 	}
 
-	public static Ship humanSetupFor3Ship() {
+	public static void humanSetupFor3Ship() {
+		boolean repeat = false;
 		Scanner scan = new Scanner(System.in);
 		int xPoint;
 		int yPoint;
@@ -140,12 +220,39 @@ public class ShipSetup extends Coordinate {
 		}
 
 		ThreeLengthShip ship = new ThreeLengthShip(c1, c2, c3);
-		humArray.add(ship); // NEW
-		return ship;
+		int size = ship.getSize();
+		for (int j = 0; j < humArray.size(); j++) {
+			if (size == compArray.get(j).getSize()) {
+				Coordinate humShipC1  = (((ThreeLengthShip) ship).getC1());
+				Coordinate arrayShipC1 = (((ThreeLengthShip) humArray.get(j)).getC1());
+				Coordinate humShipC2  = (((ThreeLengthShip) ship).getC2());
+				Coordinate arrayShipC2 = (((ThreeLengthShip) humArray.get(j)).getC2());
+				Coordinate humShipC3  = (((ThreeLengthShip) ship).getC3());
+				Coordinate arrayShipC3 = (((ThreeLengthShip) humArray.get(j)).getC3());
+				if (humShipC1.equals(arrayShipC1) || humShipC2.equals(arrayShipC2) || humShipC3.equals(arrayShipC3)) {
+					 repeat = true;
+					 break;
+				} else {
+					repeat = false;
+					continue;
+				}
+			}
+		}
+		
+		if(!repeat) {
+			humArray.add(ship);
+		}
+		else {
+			while(repeat) {
+				System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
+				humanSetupFor3Ship();
+			}
+		}
 	}
 
-	public static Ship humanSetupFor4Ship() {
+	public static void humanSetupFor4Ship() {
 		Scanner scan = new Scanner(System.in);
+		boolean repeat = false;
 		int xPoint;
 		int yPoint;
 		Coordinate c1 = new Coordinate(0, 0);
@@ -203,7 +310,36 @@ public class ShipSetup extends Coordinate {
 		}
 
 		FourLengthShip ship = new FourLengthShip(c1, c2, c3, c4);
-		humArray.add(ship); // NEW
-		return ship;
+		int size = ship.getSize();
+		for (int j = 0; j < humArray.size(); j++) {
+			if (size == compArray.get(j).getSize()) {
+				Coordinate humShipC1  = (((FourLengthShip) ship).getC1());
+				Coordinate arrayShipC1 = (((FourLengthShip) humArray.get(j)).getC1());
+				Coordinate humShipC2  = (((FourLengthShip) ship).getC2());
+				Coordinate arrayShipC2 = (((FourLengthShip) humArray.get(j)).getC2());
+				Coordinate humShipC3  = (((FourLengthShip) ship).getC3());
+				Coordinate arrayShipC3 = (((FourLengthShip) humArray.get(j)).getC3());
+				Coordinate humShipC4  = (((FourLengthShip) ship).getC4());
+				Coordinate arrayShipC4 = (((FourLengthShip) humArray.get(j)).getC4());
+				if (humShipC1.equals(arrayShipC1) || humShipC2.equals(arrayShipC2) || humShipC3.equals(arrayShipC3) || humShipC4.equals(arrayShipC4)) {
+					 repeat = true;
+					 break;
+				} else {
+					repeat = false;
+					continue;
+				}
+			}
+		}
+		
+		if(!repeat) {
+			humArray.add(ship);
+		}
+		else {
+			while(repeat) {
+				System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
+				humanSetupFor3Ship();
+			}
+		}
+		
 	}
 }
