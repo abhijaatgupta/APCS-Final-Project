@@ -1,8 +1,3 @@
-/**
- * ThreeLengthship.Java
- *
- * Coordinate objects declared
- */
 public class ThreeLengthShip extends Ship {
 	Coordinate c1;
 	Coordinate c2;
@@ -50,6 +45,40 @@ public class ThreeLengthShip extends Ship {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Getter method for ship size
+	 */
+	public int getSize() {
+		return 3;
+	}
+
+	/**
+	 * Getter method for Coordinate object 1
+	 * 
+	 * @return Coordinate object 1
+	 */
+	public Coordinate getC1() {
+		return c1;
+	}
+
+	/**
+	 * Getter method for Coordinate object 2
+	 * 
+	 * @return Coordinate object 2
+	 */
+	public Coordinate getC2() {
+		return c2;
+	}
+
+	/**
+	 * Getter method for Coordinate object 3
+	 * 
+	 * @return Coordinate object 3
+	 */
+	public Coordinate getC3() {
+		return c3;
 	}
 
 }
