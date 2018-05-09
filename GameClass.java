@@ -1,13 +1,13 @@
 import java.util.*;
 
-public class BattleshipDriver extends ShipSetup {
+public class GameClass extends ShipSetup {
 
 	public static ArrayList<Integer> compGuessesX = new <Integer>ArrayList(); // NEW
 	public static ArrayList<Integer> compGuessesY = new <Integer>ArrayList(); // NEW
 	public static ArrayList<Integer> humGuessesX = new <Integer>ArrayList(); // NEW
 	public static ArrayList<Integer> humGuessesY = new <Integer>ArrayList(); // NEW
 
-	public BattleshipDriver(int x, int y) {
+	public GameClass(int x, int y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
@@ -163,7 +163,7 @@ public class BattleshipDriver extends ShipSetup {
 	}
 
 	public static void main(String[] args) {
-		BattleshipDriver b = new BattleshipDriver(0, 0);
+		GameClass b = new GameClass(0, 0);
 		b.game();
 	}
 
