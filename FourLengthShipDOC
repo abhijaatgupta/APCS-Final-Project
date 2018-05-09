@@ -1,8 +1,3 @@
-/**
- * FourLengthship.Java
- *
- * Coordinate objects declared
- */
 public class FourLengthShip extends Ship {
 	Coordinate c1;
 	Coordinate c2;
@@ -33,6 +28,7 @@ public class FourLengthShip extends Ship {
 	 * 
 	 * @return true if hit, false if not
 	 */
+	@Override
 	public boolean isDamaged() {
 		if ((c1.isDamaged() || c2.isDamaged() || c3.isDamaged() || c4.isDamaged()) && (!isAlive())) {
 			return true;
@@ -46,6 +42,7 @@ public class FourLengthShip extends Ship {
 	 * 
 	 * @return true if all coordinates hit, false if not
 	 */
+	@Override
 	public boolean isAlive() {
 		if (c1.isDamaged() && c2.isDamaged() && c3.isDamaged() && c4.isDamaged()) {
 			return true;
@@ -54,4 +51,48 @@ public class FourLengthShip extends Ship {
 		}
 	}
 
+	/**
+	 * Getter method for ship size
+	 * 
+	 * @return ship size
+	 */
+	public int getSize() {
+		return 4;
+	}
+
+	/**
+	 * Getter method for Coordinate object 1
+	 * 
+	 * @return Coordinate object 1
+	 */
+	public Coordinate getC1() {
+		return c1;
+	}
+
+	/**
+	 * Getter method for Coordinate object 2
+	 * 
+	 * @return Coordinate object 2
+	 */
+	public Coordinate getC2() {
+		return c2;
+	}
+
+	/**
+	 * Getter method for Coordinate object 3
+	 * 
+	 * @return Coordinate object 3
+	 */
+	public Coordinate getC3() {
+		return c3;
+	}
+
+	/**
+	 * Getter method for Coordinate object 4
+	 * 
+	 * @return Coordinate object 4
+	 */
+	public Coordinate getC4() {
+		return c4;
+	}
 }
