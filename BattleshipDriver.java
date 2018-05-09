@@ -2,6 +2,11 @@ import java.util.*;
 
 public class BattleshipDriver extends ShipSetup {
 
+	public static ArrayList<Integer> compGuessesX = new <Integer>ArrayList(); // NEW
+	public static ArrayList<Integer> compGuessesY = new <Integer>ArrayList(); // NEW
+	public static ArrayList<Integer> humGuessesX = new <Integer>ArrayList(); // NEW
+	public static ArrayList<Integer> humGuessesY = new <Integer>ArrayList(); // NEW
+
 	public BattleshipDriver(int x, int y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
@@ -47,65 +52,78 @@ public class BattleshipDriver extends ShipSetup {
 		if (size1 == 2) {
 			humanSetupFor2Ship();
 		}
-			if (size2 == 2) {
-				humanSetupFor2Ship();
-			}
-				if (size3 == 2) {
-					humanSetupFor2Ship();
+		if (size2 == 2) {
+			humanSetupFor2Ship();
+		}
+		if (size3 == 2) {
+			humanSetupFor2Ship();
+		}
+		if (size1 == 3) {
+			humanSetupFor3Ship();
+		}
+		if (size2 == 3) {
+			humanSetupFor3Ship();
+		}
+		if (size3 == 3) {
+			humanSetupFor3Ship();
+		}
+		if (size1 == 4) {
+			humanSetupFor4Ship();
+		}
+		if (size2 == 4) {
+			humanSetupFor4Ship();
+		}
+		if (size3 == 4) {
+			humanSetupFor4Ship();
+		}
+		while (isGame == false) {
+			int round = 1;
+			Ship humShip1 = humArray.get(0);
+			Ship humShip2 = humArray.get(1);
+			Ship humShip3 = humArray.get(2);
+			/**
+			 * Human guessing portion
+			 */
+			System.out.println("Guess a point!");
+			System.out.println("x: ");
+			int xGuess = scan.nextInt();
+			System.out.println("y: ");
+			int yGuess = scan.nextInt();
+			// goes through the x's and y's to check if the coordinates were guessed
+			// beforehand
+			for (int i = 0; i < round - 1; i++) {
+				while (humGuessesX.get(i) == xGuess && humGuessesY.get(i) == yGuess) {
+					System.out.println("You already guesses this point, pick again");
 				}
-					if (size1 == 3) {
-						humanSetupFor3Ship();
-					}
-						if (size2 == 3) {
-							humanSetupFor3Ship();
-						}
-							if (size3 == 3) {
-								humanSetupFor3Ship();
-							}
-								if (size1 == 4) {
-									humanSetupFor4Ship();
-								}
-									if (size2 == 4) {
-										humanSetupFor4Ship();
-									}
-										if (size3 == 4) {
-											humanSetupFor4Ship();
-										}
-											while (isGame == false) {
-												Ship humShip1 = humArray.get(0);
-												Ship humShip2 = humArray.get(1);
-												Ship humShip3 = humArray.get(2);
-												System.out.println("Guess a point!");
-												System.out.println("x: ");
-												int xGuess = scan.nextInt();
-												System.out.println("y: ");
-												int yGuess = scan.nextInt();
-												System.out.println("broken");
-												if ((xGuess == compX.get(0) && yGuess == compY.get(0))) {
-													Coordinate c = new Coordinate(compX.get(0), compY.get(0));
-													System.out.println("Hit!");
-													c.setDamage(true);
-												} else if (xGuess == compX.get(1) && yGuess == compY.get(2)) {
-													Coordinate c = new Coordinate(compX.get(1), compY.get(1));
-													System.out.println("Hit!");
-													c.setDamage(true);
-												} else {
-													System.out.println("You missed");
-												}
-												int compGuessX = rand.nextInt(8);
-												int compGuessY = rand.nextInt(8);
-												if (compGuessX == humanX.get(0) && compGuessY == humanY.get(0)) {
-													Coordinate c = new Coordinate(humanX.get(0), humanY.get(0));
-													System.out.println("The computer has got a hit!");
-													c.setDamage(true);
-												} else if (compGuessX == humanX.get(1) && compGuessY == humanY.get(2)) {
-													Coordinate c = new Coordinate(humanX.get(1), humanY.get(1));
-													System.out.println("The computer has got a hit!");
-													c.setDamage(true);
-												}
-											}
-										}
-									
+			}
+			if ((xGuess == compX.get(0) && yGuess == compY.get(0))) {
+				Coordinate c = new Coordinate(compX.get(0), compY.get(0));
+				System.out.println("Hit!");
+				c.setDamage(true);
+			} else if (xGuess == compX.get(1) && yGuess == compY.get(2)) {
+				Coordinate c = new Coordinate(compX.get(1), compY.get(1));
+				System.out.println("Hit!");
+				c.setDamage(true);
+			} else {
+				System.out.println("You missed");
+			}
+			/**
+			 * Computer guessing portion
+			 */
+			int compGuessX = rand.nextInt(8);
+			int compGuessY = rand.nextInt(8);
+			if (compGuessX == humanX.get(0) && compGuessY == humanY.get(0)) {
+				Coordinate c = new Coordinate(humanX.get(0), humanY.get(0));
+				System.out.println("The computer has got a hit!");
+				c.setDamage(true);
+			} else if (compGuessX == humanX.get(1) && compGuessY == humanY.get(2)) {
+				Coordinate c = new Coordinate(humanX.get(1), humanY.get(1));
+				System.out.println("The computer has got a hit!");
+				c.setDamage(true);
+			}
+		}
+	}
+
 	protected static int shipChoice;
 
 	// NEW METHOD
