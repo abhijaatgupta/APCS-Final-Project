@@ -16,6 +16,7 @@ public class ShipSetup extends Coordinate {
 	boolean[][] board = new boolean[8][8];
 
 	public static void computer() {
+		System.out.println("Ship size 2");
 		Ship compShip = null;
 		Random rand = new Random();
 		int i = 0;
@@ -58,6 +59,7 @@ public class ShipSetup extends Coordinate {
 	}
 
 	public void humanSetupFor2Ship() {
+		System.out.println("Enter Coordinates for ship of length 2");
 		Scanner scan = new Scanner(System.in);
 		int xPoint;
 		int yPoint;
@@ -93,6 +95,7 @@ public class ShipSetup extends Coordinate {
 	}
 
 	public static void humanSetupFor3Ship() {
+		System.out.println("Enter Coordinates for ship of length 3");
 		Scanner scan = new Scanner(System.in);
 		int xPoint;
 		int yPoint;
@@ -144,6 +147,7 @@ public class ShipSetup extends Coordinate {
 	}
 
 	public static void humanSetupFor4Ship() {
+		System.out.println("Enter Coordinates for ship of length 4");
 		Scanner scan = new Scanner(System.in);
 		int xPoint;
 		int yPoint;
