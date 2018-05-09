@@ -1,12 +1,8 @@
-/**
- * TwoLengthship.Java
- *
- * Coordinate objects declared
- */
-public class TwoLengthShip extends Ship {
+ublic class TwoLengthShip extends Ship {
 	Coordinate c1;
 	Coordinate c2;
-
+	
+	
 	/**
 	 * Constructor to initialize the Coordinate objects
 	 * 
@@ -15,11 +11,10 @@ public class TwoLengthShip extends Ship {
 	 * @param c2
 	 *            Coordinate object
 	 */
-	public TwoLengthShip(Coordinate c1, Coordinate c2) {
+	public TwoLengthShip(Coordinate c1, Coordinate c2){
 		this.c1 = c1;
 		this.c2 = c2;
 	}
-
 	/**
 	 * Boolean method to see if guessed coordinate hits a ship
 	 * 
@@ -27,9 +22,10 @@ public class TwoLengthShip extends Ship {
 	 */
 	@Override
 	public boolean isDamaged() {
-		if ((c1.isDamaged() || c2.isDamaged()) && (!isAlive())) {
+		if((c1.isDamaged() || c2.isDamaged()) && (!isAlive())) {
 			return true;
-		} else {
+		}
+		else{
 			return false;
 		}
 	}
@@ -41,11 +37,34 @@ public class TwoLengthShip extends Ship {
 	 */
 	@Override
 	public boolean isAlive() {
-		if (c1.isDamaged() && c2.isDamaged()) {
+		if(c1.isDamaged() && c2.isDamaged()) {
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
-
+	/**
+	 * Getter method for ship size
+	 * @return ship size
+	 */
+	public int getSize() {
+		return 2;
+	}
+	/**
+	 * Getter method for Coordinate object 1
+	 * 
+	 * @return Coordinate object 1
+	 */
+	public Coordinate getC1() {
+		return c1;
+	}
+	/**
+	 * Getter method for Coordinate object 2
+	 * 
+	 * @return Coordinate object 2
+	 */
+	public Coordinate getC2() {
+		return c2;
+	}
 }
