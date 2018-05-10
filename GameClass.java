@@ -4,8 +4,7 @@ public class GameClass extends ShipSetup {
 
 	public static ArrayList<Integer> compGuessesX = new <Integer>ArrayList(); // NEW
 	public static ArrayList<Integer> compGuessesY = new <Integer>ArrayList(); // NEW
-	public static ArrayList<Integer> humGuessesX = new <Integer>ArrayList(); // NEW
-	public static ArrayList<Integer> humGuessesY = new <Integer>ArrayList(); // NEW
+	public static boolean guesses[][] = new boolean[8][8];
 
 	public GameClass(int x, int y) {
 		super(x, y);
@@ -17,6 +16,11 @@ public class GameClass extends ShipSetup {
 	Scanner scan = new Scanner(System.in);
 
 	public void game() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				guesses[i][j] = false;
+			}
+		}
 		boolean isGame = false;
 		computer();
 		ArrayList<Integer> xPoints = new <Integer>ArrayList();
@@ -76,6 +80,13 @@ public class GameClass extends ShipSetup {
 		if (size3 == 4) {
 			humanSetupFor4Ship();
 		}
+		for (int i = 0; i < compX.size(); i++) {
+			System.out.println(compX.get(i) + "," + compY.get(i));
+		}
+		System.out.println();
+		for (int i = 0; i < humanX.size(); i++) {
+			System.out.println(humanX.get(i) + "," + humanY.get(i));
+		}
 		while (isGame == false) {
 			int round = 1;
 			Ship humShip1 = humArray.get(0);
@@ -89,29 +100,42 @@ public class GameClass extends ShipSetup {
 			int xGuess = scan.nextInt();
 			System.out.println("y: ");
 			int yGuess = scan.nextInt();
-			// goes through the x's and y's to check if the coordinates were guessed
-			// beforehand
-			for (int i = 0; i < round - 1; i++) {
-				while (humGuessesX.get(i) == xGuess && humGuessesY.get(i) == yGuess) {
-					System.out.println("You already guesses this point, pick again");
+			// goes through the x's and y's to check if the coordinates were guessed beforehand
+			while (guesses[xGuess][yGuess] == true) {
+				System.out.println("You already guessed that point, guess again.");
+				System.out.println("x: ");
+				xGuess = scan.nextInt();
+				System.out.println("y: ");
+				yGuess = scan.nextInt();
+			}
+			guesses[xGuess][yGuess] = true;
+			// checks the humans guess
+			boolean hit = false;
+			for (int i = 0; i < compX.size(); i++) {
+				if ((xGuess == compX.get(i) && yGuess == compY.get(i))) {
+					Coordinate c = new Coordinate(compX.get(i), compY.get(i));
+					System.out.println("Hit!");
+					c.setDamage(true);
+					hit = true;
+					break;
+				} else {
+					hit = false;
 				}
 			}
-			if ((xGuess == compX.get(0) && yGuess == compY.get(0))) {
-				Coordinate c = new Coordinate(compX.get(0), compY.get(0));
-				System.out.println("Hit!");
-				c.setDamage(true);
-			} else if (xGuess == compX.get(1) && yGuess == compY.get(2)) {
-				Coordinate c = new Coordinate(compX.get(1), compY.get(1));
-				System.out.println("Hit!");
-				c.setDamage(true);
-			} else {
-				System.out.println("You missed");
+			if (hit == false) {
+				System.out.println("You missed!");
 			}
 			/**
 			 * Computer guessing portion
 			 */
 			int compGuessX = rand.nextInt(8);
 			int compGuessY = rand.nextInt(8);
+			for (int i = 0; i < round - 1; i++) {
+				while (compGuessesX.get(i) == compGuessX && compGuessesY.get(i) == compGuessY) {
+					System.out.println("You already guesses this point, pick again");
+				}
+			}
+
 			if (compGuessX == humanX.get(0) && compGuessY == humanY.get(0)) {
 				Coordinate c = new Coordinate(humanX.get(0), humanY.get(0));
 				System.out.println("The computer has got a hit!");
@@ -121,6 +145,7 @@ public class GameClass extends ShipSetup {
 				System.out.println("The computer has got a hit!");
 				c.setDamage(true);
 			}
+			round++;
 		}
 	}
 
