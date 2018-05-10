@@ -100,7 +100,8 @@ public class GameClass extends ShipSetup {
 			int xGuess = scan.nextInt();
 			System.out.println("y: ");
 			int yGuess = scan.nextInt();
-			// goes through the x's and y's to check if the coordinates were guessed beforehand
+			// goes through the x's and y's to check if the coordinates were guessed
+			// beforehand
 			while (guesses[xGuess][yGuess] == true) {
 				System.out.println("You already guessed that point, guess again.");
 				System.out.println("x: ");
