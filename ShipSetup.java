@@ -7,6 +7,7 @@ public class ShipSetup extends Coordinate {
 	public static ArrayList<Integer> compY = new <Integer>ArrayList(); // NEW
 	public static ArrayList<Integer> humanX = new <Integer>ArrayList(); // NEW
 	public static ArrayList<Integer> humanY = new <Integer>ArrayList(); // NEW
+	public static ArrayList<Coordinate> cList= new <Coordinate>ArrayList();
 	//create a new arraylist for coordinates
 
 	public ShipSetup(int x, int y) {
@@ -139,13 +140,14 @@ public class ShipSetup extends Coordinate {
 			if (!repeat) {
 				i++;
 			} else {
-				i = i + 0;
+				i = i + 0;//CHANGE
 			}
 		}
 	}
 
 	public static void humanSetupFor2Ship() {
-		int round = 1;//Change
+		int currentRound = 1;//Change
+		int newRound = 1;
 		TwoLengthShip ship;
 		Scanner scan = new Scanner(System.in);
 		boolean repeat = false;//CHANGE
@@ -168,7 +170,26 @@ public class ShipSetup extends Coordinate {
 				c2 = new Coordinate(xPoint, yPoint);
 			}
 			int size = 2;
-			for (int j = 0; j < humArray.size(); j++) {//change
+			for(int p = 0; p < cList.size(); p++) {
+				if((c1.equals(cList.get(p)) && currentRound == newRound) || (c2.equals(cList.get(p)))) {
+					repeat = true;
+					System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
+					break;
+					
+				}
+				else {
+					repeat = false;
+				}
+			}
+			if(i == 1 && !repeat) {
+				cList.add(c1);
+				currentRound++;
+			}
+			else if(i == 2 && !repeat) {
+				cList.add(c2);
+				newRound++;
+			}
+			/*for (int j = 0; j < humArray.size(); j++) {//change
 				if (size == humArray.get(j).getSize()) {
 					Coordinate humShipC1 = (((TwoLengthShip) ship).getC1());
 					Coordinate arrayShipC1 = (((TwoLengthShip) humArray.get(j)).getC1());
@@ -185,15 +206,8 @@ public class ShipSetup extends Coordinate {
 						
 					}
 				}
-			}
-			if(!repeat) {
-				ship = new TwoLengthShip(c1, c2);
-				humanX.add((((TwoLengthShip) ship).getC1().getX()));
-				humanY.add((((TwoLengthShip) ship).getC1().getY()));
-				humanX.add((((TwoLengthShip) ship).getC2().getX()));
-				humanY.add((((TwoLengthShip) ship).getC2().getY()));
-				humArray.add(ship);
-			}
+			}*/
+		
 			while ((xPoint > 7 || xPoint < 0) || (yPoint > 7 || yPoint < 0)) {
 				System.out.println("Out of bounds");
 				System.out.println("Pick another point!");
@@ -215,13 +229,26 @@ public class ShipSetup extends Coordinate {
 					yPoint = scan.nextInt();
 					
 					c2 = new Coordinate(xPoint, yPoint);
-					round++;//Change
 				}
 			}
 			
+			if(!repeat) {
+				i = i + 0;
+			}
+			else {
+				i--;
+			}
+			
+		}
+		if(!repeat) {
+			ship = new TwoLengthShip(c1, c2);
+			humanX.add((((TwoLengthShip) ship).getC1().getX()));
+			humanY.add((((TwoLengthShip) ship).getC1().getY()));
+			humanX.add((((TwoLengthShip) ship).getC2().getX()));
+			humanY.add((((TwoLengthShip) ship).getC2().getY()));
+			humArray.add(ship);
 		}
 		
-		 
 
 		
 		//else {
@@ -237,7 +264,11 @@ public class ShipSetup extends Coordinate {
 	// }
 
 	public static void humanSetupFor3Ship() {
+		ThreeLengthShip ship;
 		boolean repeat = false;
+		int currentRound = 1;
+		int midRound = 1;
+		int newRound = 1;
 		Scanner scan = new Scanner(System.in);
 		int xPoint;
 		int yPoint;
@@ -273,10 +304,10 @@ public class ShipSetup extends Coordinate {
 				}
 			} else if (i == 3) {
 				c3 = new Coordinate(xPoint, yPoint);
-				while (Math.abs(c3.getX() - c1.getX()) != 1 || Math.abs(c3.getY() - c2.getY()) != 1) {
-					while (Math.abs(c3.getX() - c2.getX()) != 1 || Math.abs(c3.getY() - c2.getY()) != 1) {
+				while (Math.abs(c3.getX() - c1.getX()) != 1 && Math.abs(c3.getY() - c2.getY()) != 1) {
+					while (Math.abs(c3.getX() - c2.getX()) != 1 && Math.abs(c3.getY() - c2.getY()) != 1) {
 						System.out.println("Please enter a third point next"
-								+ "to the first one or second one. (1 within point of either)");
+								+ " to the first one or second one. (1 within point of either)");
 						System.out.println("Re-enter the previous coordinate");
 						System.out.println("x: ");
 						xPoint = scan.nextInt();
@@ -286,29 +317,67 @@ public class ShipSetup extends Coordinate {
 					}
 				}
 			}
-		}
-
-		ThreeLengthShip ship = new ThreeLengthShip(c1, c2, c3);
-		int size = ship.getSize();
-		for (int j = 0; j < humArray.size(); j++) {
-			if (size == compArray.get(j).getSize()) {
-				Coordinate humShipC1 = (((ThreeLengthShip) ship).getC1());
-				Coordinate arrayShipC1 = (((ThreeLengthShip) humArray.get(j)).getC1());
-				Coordinate humShipC2 = (((ThreeLengthShip) ship).getC2());
-				Coordinate arrayShipC2 = (((ThreeLengthShip) humArray.get(j)).getC2());
-				Coordinate humShipC3 = (((ThreeLengthShip) ship).getC3());
-				Coordinate arrayShipC3 = (((ThreeLengthShip) humArray.get(j)).getC3());
-				if (humShipC1.equals(arrayShipC1) || humShipC2.equals(arrayShipC2) || humShipC3.equals(arrayShipC3)) {
+			for(int p = 0; p < cList.size(); p++) {
+				if((c1.equals(cList.get(p)) && currentRound == newRound) || (c2.equals(cList.get(p)) && midRound == newRound) || (c3.equals(cList.get(p)))) {
 					repeat = true;
+					System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
 					break;
-				} else {
+					
+				}
+				else {
 					repeat = false;
-					continue;
 				}
 			}
-		}
+			if(i == 1 && !repeat) {
+				cList.add(c1);
+				currentRound++;
+			}
+			else if(i == 2 && !repeat) {
+				cList.add(c2);
+				midRound++;
+			}
+			else if(i== 3 && !repeat) {
+				cList.add(c3);
+				newRound++;
+			}
+			
+			
+			 ship = new ThreeLengthShip(c1, c2, c3);
+			int size = ship.getSize();
+			/*for (int j = 0; j < humArray.size(); j++) {
+				if (size == compArray.get(j).getSize()) {
+					Coordinate humShipC1 = (((ThreeLengthShip) ship).getC1());
+					Coordinate arrayShipC1 = (((ThreeLengthShip) humArray.get(j)).getC1());
+					Coordinate humShipC2 = (((ThreeLengthShip) ship).getC2());
+					Coordinate arrayShipC2 = (((ThreeLengthShip) humArray.get(j)).getC2());
+					Coordinate humShipC3 = (((ThreeLengthShip) ship).getC3());
+					Coordinate arrayShipC3 = (((ThreeLengthShip) humArray.get(j)).getC3());
+					if (humShipC1.equals(arrayShipC1) || humShipC2.equals(arrayShipC2) || humShipC3.equals(arrayShipC3)) {
+						repeat = true;
+						break;
+					} else {
+						repeat = false;
+						continue;
+					}
+				}
+			}*/
 
+			/* else {
+				while (repeat) {
+					System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
+					humanSetupFor3Ship();
+				}
+			}*/
+			
+			if(!repeat) {
+				i = i + 0;
+			}
+			else {
+				i--;
+			}
+		}
 		if (!repeat) {
+			ship = new ThreeLengthShip(c1, c2, c3);
 			humanX.add((((ThreeLengthShip) ship).getC1().getX()));
 			humanY.add((((ThreeLengthShip) ship).getC1().getY()));
 			humanX.add((((ThreeLengthShip) ship).getC2().getX()));
@@ -316,17 +385,17 @@ public class ShipSetup extends Coordinate {
 			humanX.add((((ThreeLengthShip) ship).getC3().getX()));
 			humanY.add((((ThreeLengthShip) ship).getC3().getY()));
 			humArray.add(ship);
-		} else {
-			while (repeat) {
-				System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
-				humanSetupFor3Ship();
-			}
 		}
+		
 	}
 
 	public static void humanSetupFor4Ship() {
 		Scanner scan = new Scanner(System.in);
 		boolean repeat = false;
+		int currentRound = 1;
+		int midRound = 1;
+		int newRound = 1;
+		int lastRound = 1;
 		int xPoint;
 		int yPoint;
 		Coordinate c1 = new Coordinate(0, 0);
@@ -362,8 +431,8 @@ public class ShipSetup extends Coordinate {
 				}
 			} else if (i == 3) {
 				c3 = new Coordinate(xPoint, yPoint);
-				while (Math.abs(c3.getX() - c1.getX()) > 1 || Math.abs(c3.getY() - c2.getY()) > 1) {
-					while (Math.abs(c3.getX() - c2.getX()) > 1 || Math.abs(c3.getY() - c2.getY()) > 1) {
+				while (Math.abs(c3.getX() - c1.getX()) > 1 && Math.abs(c3.getY() - c2.getY()) > 1) {
+					while (Math.abs(c3.getX() - c2.getX()) > 1 && Math.abs(c3.getY() - c2.getY()) > 1) {
 						System.out.println("Please enter a third point next"
 								+ "to the first one or second one. (1 within point of either)");
 						System.out.println("x: ");
@@ -375,9 +444,9 @@ public class ShipSetup extends Coordinate {
 				}
 			} else if (i == 4) {
 				c4 = new Coordinate(xPoint, yPoint);
-				while (Math.abs(c4.getX() - c3.getX()) != 1 || Math.abs(c4.getY() - c3.getY()) != 1) {
-					while (Math.abs(c4.getX() - c2.getX()) != 1 || Math.abs(c4.getY() - c2.getY()) != 1) {
-						while (Math.abs(c4.getX() - c1.getX()) != 1 || Math.abs(c4.getY() - c1.getY()) != 1) {
+				while (Math.abs(c4.getX() - c3.getX()) != 1 && Math.abs(c4.getY() - c3.getY()) != 1) {
+					while (Math.abs(c4.getX() - c2.getX()) != 1 && Math.abs(c4.getY() - c2.getY()) != 1) {
+						while (Math.abs(c4.getX() - c1.getX()) != 1 && Math.abs(c4.getY() - c1.getY()) != 1) {
 							System.out.println("Please enter a fourth point next"
 									+ " to the first second or third one. (1 within point of any)");
 							System.out.println("Re-enter the previous coordinate");
@@ -390,10 +459,45 @@ public class ShipSetup extends Coordinate {
 					}
 				}
 			}
+			for(int p = 0; p < cList.size(); p++) {
+				if((c1.equals(cList.get(p)) && currentRound == newRound) || (c2.equals(cList.get(p)) && midRound == newRound) || (c3.equals(cList.get(p)) && lastRound == newRound) || (c4.equals(cList.get(p)))) {
+					repeat = true;
+					System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
+					break;
+					
+				}
+				else {
+					repeat = false;
+				}
+			}
+			if(i == 1 && !repeat) {
+				cList.add(c1);
+				currentRound++;
+			}
+			else if(i == 2 && !repeat) {
+				cList.add(c2);
+				midRound++;
+			}
+			else if(i == 3 && !repeat) {
+				cList.add(c3);
+				lastRound++;
+			}
+			else if(i == 4 && !repeat) {
+				cList.add(c4);
+				newRound++;
+			}
+			
+			if(!repeat) {
+				i = i + 0;
+			}
+			else {
+				i--;
+			}
+			
 
 		}
 
-		FourLengthShip ship = new FourLengthShip(c1, c2, c3, c4);
+		/*FourLengthShip ship = new FourLengthShip(c1, c2, c3, c4);
 		int size = ship.getSize();
 		for (int j = 0; j < humArray.size(); j++) {
 			if (size == compArray.get(j).getSize()) {
@@ -414,9 +518,10 @@ public class ShipSetup extends Coordinate {
 					continue;
 				}
 			}
-		}
+		}*/
 
-		if (!repeat) {	
+		if (!repeat) {
+			FourLengthShip ship = new FourLengthShip(c1, c2, c3, c4);
 			humanX.add((((FourLengthShip) ship).getC1().getX()));
 			humanY.add((((FourLengthShip) ship).getC1().getY()));
 			humanX.add((((FourLengthShip) ship).getC2().getX()));
@@ -426,12 +531,12 @@ public class ShipSetup extends Coordinate {
 			humanX.add((((FourLengthShip) ship).getC4().getX()));
 			humanY.add((((FourLengthShip) ship).getC4().getY()));
 			humArray.add(ship);
-		} else {
+		} /*else {
 			while (repeat) {
 				System.out.println("You have chosen coordinates that overlap with another ship! Please try again.");
 				humanSetupFor3Ship();
 			}
-		}
+		}*/
 
 	}
 }
