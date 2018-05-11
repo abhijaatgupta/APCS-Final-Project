@@ -145,9 +145,9 @@ public class GameClass extends ShipSetup {
 								//System.out.println();
 								System.out.println("Your stats:");
 								System.out.println(updateStatus(0));
-								//System.out.println("Computer's stats:");
-								//System.out.println(updateCompStatus(0));
-								//compArray.remove(m);
+								System.out.println("Computer's stats:");
+								System.out.println(updateCompStatus(0));
+							    compArray.remove(m);
 								break;
 							}
 							else if(humanBoard[x1][y1] || humanBoard[x2][y2]) {
@@ -178,8 +178,8 @@ public class GameClass extends ShipSetup {
 								//System.out.println();
 								System.out.println("Your stats:");
 							    System.out.println(updateStatus(0));
-								//System.out.println("Computer's stats:");
-								//System.out.println(updateCompStatus(0));
+								System.out.println("Computer's stats:");
+								System.out.println(updateCompStatus(0));
 								//compArray.remove(m);
 								break;
 							}
@@ -211,8 +211,8 @@ public class GameClass extends ShipSetup {
 								//System.out.println();
 								System.out.println("Your stats:");
 								System.out.println(updateStatus(0));
-								//System.out.println("Computer's stats:");
-								//System.out.println(updateCompStatus(0));
+								System.out.println("Computer's stats:");
+								System.out.println(updateCompStatus(0));
 								//compArray.remove(m);
 								break;
 							}
@@ -262,16 +262,17 @@ public class GameClass extends ShipSetup {
 									//hDead.set(m, true);
 									//hDamaged.set(m, true);
 									humArray.get(m).setStatus(false);
-								}
+								
 								currentShip.setStatus(false);
 								System.out.println("The computer sunk your ship of length two!");
 								//System.out.println();
-								//System.out.println("Your stats:");
-								//System.out.println(updateStatus(0));
-								//System.out.println("Computer's stats:");
-								//System.out.println(updateCompStatus(0));
+								System.out.println("Your stats:");
+								System.out.println(updateStatus(0));
+								System.out.println("Computer's stats:");
+								System.out.println(updateCompStatus(0));
 								//humArray.remove(m);
 								break;
+								}
 							}
 							else if(compBoard[x1][y1] || compBoard[x2][y2]) {
 						    	Coordinate c1 = new Coordinate(x1, y1);
@@ -281,9 +282,10 @@ public class GameClass extends ShipSetup {
 									//hDead.set(m, false);
 									//hDamaged.set(m, true);
 									humArray.get(m).setDamage(true);
-								}
+								
 								currentShip.setDamage(true);
 								break;
+								}
 							}
 						}
 						else if((humArray.get(m).getSize() == 3)){
@@ -300,19 +302,21 @@ public class GameClass extends ShipSetup {
 								//hDead.set(m, true);
 								//hDamaged.set(m, true);
 								currentShip.setStatus(false);
+								humArray.get(m).setStatus(false);
 								System.out.println("The computer sunk your ship of length three!");
 								//System.out.println();
-								//System.out.println("Your stats:");
-								//System.out.println(updateStatus(0));
-								//System.out.println("Computer's stats:");
-								//System.out.println(updateCompStatus(0));
-								humArray.remove(m);
+								System.out.println("Your stats:");
+								System.out.println(updateStatus(0));
+								System.out.println("Computer's stats:");
+								System.out.println(updateCompStatus(0));
+								//humArray.remove(m);
 								break;
 							}
 							else if(compBoard[x1][y1] || compBoard[x2][y2] || compBoard[x3][y3]) {
 								//hLiving.set(m, true);
 								//hDead.set(m, false);
 								//hDamaged.set(m, true);
+								humArray.get(m).setDamage(true);
 								currentShip.setDamage(true);
 								break;
 							}
@@ -333,19 +337,21 @@ public class GameClass extends ShipSetup {
 								//hDead.set(m, true);
 								//hDamaged.set(m, true);
 								currentShip.setStatus(false);
+								humArray.get(m).setStatus(false);
 								System.out.println("The computer sunk your ship of length four!");
 								//System.out.println();
-								//System.out.println("Your stats:");
-								//System.out.println(updateStatus(0));
-								//System.out.println("Computer's stats:");
-								//System.out.println(updateCompStatus(0));
-								humArray.remove(m);
+								System.out.println("Your stats:");
+								System.out.println(updateStatus(0));
+								System.out.println("Computer's stats:");
+								System.out.println(updateCompStatus(0));
+								//humArray.remove(m);
 								break;
 							}
 							else if(compBoard[x1][y1] || compBoard[x2][y2] || compBoard[x3][y3] || compBoard[x4][y4]) {
 								//hLiving.set(m, true);
 								//hDead.set(m, false);
 								//hDamaged.set(m, true);
+								humArray.get(m).setDamage(true);
 								currentShip.setDamage(true);
 								break;
 							}
@@ -354,13 +360,13 @@ public class GameClass extends ShipSetup {
 					
 				}
 		    }
-			if(compArray.size() == 0) {
+			/*if(compArray.size() == 0) {
 				System.out.println("Congratulations, you sunk all the computer's ships and won!");
 				isGame = true;
 			}
 			else if(humArray.size() == 0) {
 				System.out.println("Sorry, the computer sunk all your ships. You lose!");
-			}
+			}*/
 		}
 			/*for (int i = 0; i < round - 1; i++) {
 				while (compGuessesX.get(i) == compGuessX && compGuessesY.get(i) == compGuessY) {
@@ -424,24 +430,28 @@ public class GameClass extends ShipSetup {
 	private String updateCompStatus(int low) {
 	
 		if (low == 3) {
-			s2 += "Alive: " + aliveCount2 + "\n" + "Dead: " + deadCount2 + "\n" + "Damaged: " + damageCount2 + "\n";
+			s += "Alive: " + aliveCount2 + "\n" + "Dead: " + deadCount2 + "\n" + "Damaged: " + damageCount2 + "\n";
+			damageCount2 = 0;
+			aliveCount2 = 0;
+			deadCount2 = 0;
 			return s2;
+			
 		} else {
-			s2 = "";
-			if (living.get(low)) {
+			s = "";
+			if (compArray.get(low).isAlive()) {
 				aliveCount2++;
 			}
-			if (damaged.get(low)) {
+			if (compArray.get(low).isDamaged()) {
 				damageCount2++;
 			}
-			if (dead.get(low)) {
-			
+			if (!compArray.get(low).isAlive()) {
 				deadCount2++;
 			}
 
 		}
 		low = low + 1;
-		return updateStatus(low);
+		return updateCompStatus(low);
+
 
 
 	}
