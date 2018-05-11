@@ -10,7 +10,11 @@ public class ThreeLengthShip extends Ship {
 	}
 	@Override
 	public boolean isDamaged() {
-		if((c1.isDamaged() || c2.isDamaged() || c3.isDamaged()) && (!isAlive())) {
+		if((c1.isDamaged() || c2.isDamaged() || c3.isDamaged())) {
+			return true;
+		}
+		else if(c1.isDamaged() && c2.isDamaged() && c3.isDamaged()) {
+			setStatus(false);
 			return true;
 		}
 		else{
@@ -20,12 +24,37 @@ public class ThreeLengthShip extends Ship {
 
 	@Override
 	public boolean isAlive() {
-		if(c1.isDamaged() && c2.isDamaged() && c3.isDamaged()) {
+		if(c1.isDamaged() || c2.isDamaged() || c3.isDamaged()) {
+			return true;
+		}
+		else if(!c1.isDamaged() && !c2.isDamaged() && !c3.isDamaged()) {
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+	public int getSize() {
+		return 3;
+	}
+	public Coordinate getC1() {
+		return c1;
+	}
+	public Coordinate getC2() {
+		return c2;
+	}
+	public Coordinate getC3() {
+		return c3;
+	}
+	@Override
+	public void setStatus(boolean status) {
+		isAlive = status;
+		
+	}
+	@Override
+	public void setDamage(boolean status) {
+		isDamaged = status;
+		
 	}
 
 }
