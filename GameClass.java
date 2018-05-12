@@ -9,11 +9,9 @@ public class GameClass extends ShipSetup {
 	public static boolean humanBoard[][] = new boolean[8][8];
 	public static boolean compBoard[][] = new boolean[8][8];
 	public static ArrayList<Boolean> living = new ArrayList<Boolean>(3);
-	public static ArrayList<Boolean> dead = new ArrayList<Boolean>(3);
-	public static ArrayList<Boolean> damaged = new ArrayList<Boolean>(3);
 	public static ArrayList<Boolean> hLiving = new ArrayList<Boolean>(3);
-	public static ArrayList<Boolean> hDead = new ArrayList<Boolean>(3);
-	public static ArrayList<Boolean> hDamaged = new ArrayList<Boolean>(3);
+
+
 
 
 	public GameClass(int x, int y) {
@@ -26,9 +24,12 @@ public class GameClass extends ShipSetup {
 	Scanner scan = new Scanner(System.in);
 
 	public void game() {
-	/*	for (int k = 0; k < 3; k++) {
-			living.set(k, true);
-		}*/
+		living.add(true);
+		living.add(true);
+		living.add(true);
+		hLiving.add(true);
+		hLiving.add(true);
+		hLiving.add(true);
 		boolean isGame = false;
 		computer();
 		ArrayList<Integer> xPoints = new <Integer>ArrayList();
@@ -88,6 +89,8 @@ public class GameClass extends ShipSetup {
 		if (size3 == 4) {
 			humanSetupFor4Ship();
 		}
+		
+		
 		for (int i = 0; i < compX.size(); i++) {//FOR TESTING PURPOSES ONLY, REMOVE FOR ACTUAL PRESENTATION
 			System.out.println(compX.get(i) + "," + compY.get(i));//FOR TESTING PURPOSES ONLY, REMOVE FOR ACTUAL PRESENTATION
 		}//FOR TESTING PURPOSES ONLY, REMOVE FOR ACTUAL PRESENTATION
@@ -96,10 +99,17 @@ public class GameClass extends ShipSetup {
 			System.out.println(humanX.get(i) + "," + humanY.get(i));//FOR TESTING PURPOSES ONLY, REMOVE FOR ACTUAL PRESENTATION
 		}//FOR TESTING PURPOSES ONLY, REMOVE FOR ACTUAL PRESENTATION
 		while (isGame == false) {
-			int round = 1;
+			if(humArray.size() >= 1) {
 			Ship humShip1 = humArray.get(0);
+			}
+			if(humArray.size() >= 2) {
 			Ship humShip2 = humArray.get(1);
+			}
+			if(humArray.size() >= 3) {
 			Ship humShip3 = humArray.get(2);
+			}
+			int round = 1;
+		
 			/**
 			 * Human guessing portion
 			 */
@@ -135,14 +145,27 @@ public class GameClass extends ShipSetup {
 							int y1 = currentShip.getC1().getY();
 							int x2 = currentShip.getC2().getX();
 							int y2 = currentShip.getC2().getY();
+							Coordinate c1 = new Coordinate(x1, y1);
+							Coordinate c2 = new Coordinate(x2, y2);
 							
-							if(humanBoard[x1][y1] && humanBoard[x2][y2]) {
-								compArray.get(m).setStatus(false);
+							if((humanBoard[x1][y1] && humanBoard[x2][y2]) && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2)) ) {
+								if(!living.get(m)) {
+									for(int s = 0; s < living.size(); s++) {
+										if(living.get(s)) {
+											living.set(s, false);
+											break;
+										}
+									}
+								}
+								else {
+									living.set(m, false);
+								}
+								//compArray.get(m).setStatus(false);
 								//living.set(m, false);
 								//dead.set(m, true);
 								//damaged.set(m, true);
 								System.out.println("You sunk a ship of length two!");
-								//System.out.println();
+								System.out.println();
 								System.out.println("Your stats:");
 								System.out.println(updateStatus(0));
 								System.out.println("Computer's stats:");
@@ -150,12 +173,13 @@ public class GameClass extends ShipSetup {
 							    compArray.remove(m);
 								break;
 							}
-							else if(humanBoard[x1][y1] || humanBoard[x2][y2]) {
-								compArray.get(m).setDamage(true);
+							else if((humanBoard[x1][y1] || humanBoard[x2][y2])  && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2))) {
+					
+								//compArray.get(m).setDamage(true);
 								//living.set(m, true);
 								//dead.set(m, false);
 								//damaged.set(m, true);
-								currentShip.setDamage(true);
+								//currentShip.setDamage(true);
 								break;
 							}
 						}
@@ -167,27 +191,42 @@ public class GameClass extends ShipSetup {
 							int y2 = currentShip.getC2().getY();
 							int x3 = currentShip.getC3().getX();
 							int y3 = currentShip.getC3().getY();
+							Coordinate c1 = new Coordinate(x1, y1);
+							Coordinate c2 = new Coordinate(x2, y2);
+							Coordinate c3 = new Coordinate(x3, y3);
 							
-							if(humanBoard[x1][y1] && humanBoard[x2][y2] && humanBoard[x3][y3]) {
-								currentShip.setStatus(false);
+							if((humanBoard[x1][y1] && humanBoard[x2][y2] && humanBoard[x3][y3]) && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2) && currentShip.getC3().equals(c3)) ) {
+								if(!living.get(m)) {
+									for(int s = 0; s < living.size(); s++) {
+										if(living.get(s)) {
+											living.set(s, false);
+											break;
+										}
+									}
+								}
+								else {
+									living.set(m, false);
+								}
+								//currentShip.setStatus(false);
 								//living.set(m, false);
 								//dead.set(m, true);
 								//damaged.set(m, true);
-								currentShip.setStatus(false);
+								//currentShip.setStatus(false);
 								System.out.println("You sunk a ship of length three!");
-								//System.out.println();
+								System.out.println();
 								System.out.println("Your stats:");
 							    System.out.println(updateStatus(0));
 								System.out.println("Computer's stats:");
 								System.out.println(updateCompStatus(0));
-								//compArray.remove(m);
+								compArray.remove(m);
 								break;
 							}
-							else if(humanBoard[x1][y1] || humanBoard[x2][y2] || humanBoard[x3][y3]) {
+							else if((humanBoard[x1][y1] || humanBoard[x2][y2] || humanBoard[x3][y3])  && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2) && currentShip.getC3().equals(c3))) {
+							
 								//living.set(m, true);
 								//dead.set(m, false);
 								//damaged.set(m, true);
-								currentShip.setDamage(true);
+								//currentShip.setDamage(true);
 								break;
 							}
 						}
@@ -201,26 +240,42 @@ public class GameClass extends ShipSetup {
 							int y3 = currentShip.getC3().getY();
 							int x4 = currentShip.getC4().getX();
 							int y4 = currentShip.getC4().getY();
+							Coordinate c1 = new Coordinate(x1, y1);
+							Coordinate c2 = new Coordinate(x2, y2);
+							Coordinate c3 = new Coordinate(x3, y3);
+							Coordinate c4 = new Coordinate(x4, y4);
 							
-							if(humanBoard[x1][y1] && humanBoard[x2][y2] && humanBoard[x3][y3] && humanBoard[x4][y4]) {
+							if((humanBoard[x1][y1] && humanBoard[x2][y2] && humanBoard[x3][y3] && humanBoard[x4][y4]) && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2) && currentShip.getC3().equals(c3) && currentShip.getC4().equals(c4)) ) {
+								if(!living.get(m)) {
+									for(int s = 0; s < living.size(); s++) {
+										if(living.get(s)) {
+											living.set(s, false);
+											break;
+										}
+									}
+								}
+								else {
+									living.set(m, false);
+								}
 								//living.set(m, false);
 								//dead.set(m, true);
 								//damaged.set(m, true);
-								currentShip.setStatus(false);
+								//currentShip.setStatus(false);
 								System.out.println("You sunk a ship of length four!");
-								//System.out.println();
+								System.out.println();
 								System.out.println("Your stats:");
 								System.out.println(updateStatus(0));
 								System.out.println("Computer's stats:");
 								System.out.println(updateCompStatus(0));
-								//compArray.remove(m);
+								compArray.remove(m);
 								break;
 							}
-							else if(humanBoard[x1][y1] || humanBoard[x2][y2] || humanBoard[x3][y3] || humanBoard[x4][y4]) {
+							else if((humanBoard[x1][y1] || humanBoard[x2][y2] || humanBoard[x3][y3] || humanBoard[x4][y4]) && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2) && currentShip.getC3().equals(c3) && currentShip.getC4().equals(c4))) {
+							
 								//living.set(m, true);
 								//dead.set(m, false);
 								//damaged.set(m, true);
-								currentShip.setDamage(true);
+								//currentShip.setDamage(true);
 								break;
 							}
 						}
@@ -258,32 +313,43 @@ public class GameClass extends ShipSetup {
 								Coordinate c1 = new Coordinate(x1, y1);
 								Coordinate c2 = new Coordinate(x2, y2);
 								if(currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2)) {
+									if(!hLiving.get(m)) {
+										for(int s = 0; s < hLiving.size(); s++) {
+											if(hLiving.get(s)) {
+												hLiving.set(s, false);
+												break;
+											}
+										}
+									}
+									else {
+										hLiving.set(m, false);
+									}
 									//hLiving.set(m, false);
 									//hDead.set(m, true);
 									//hDamaged.set(m, true);
-									humArray.get(m).setStatus(false);
+									//humArray.get(m).setStatus(false);
 								
-								currentShip.setStatus(false);
+								//currentShip.setStatus(false);
 								System.out.println("The computer sunk your ship of length two!");
-								//System.out.println();
+								System.out.println();
 								System.out.println("Your stats:");
 								System.out.println(updateStatus(0));
 								System.out.println("Computer's stats:");
 								System.out.println(updateCompStatus(0));
-								//humArray.remove(m);
+								humArray.remove(m);
 								break;
 								}
 							}
 							else if(compBoard[x1][y1] || compBoard[x2][y2]) {
 						    	Coordinate c1 = new Coordinate(x1, y1);
 								Coordinate c2 = new Coordinate(x2, y2);
-								if(currentShip.getC1().equals(c1) || currentShip.getC2().equals(c2)) {
+								if(currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2)) {
 									//hLiving.set(m, true);
 									//hDead.set(m, false);
 									//hDamaged.set(m, true);
-									humArray.get(m).setDamage(true);
+									//humArray.get(m).setDamage(true);
 								
-								currentShip.setDamage(true);
+								//currentShip.setDamage(true);
 								break;
 								}
 							}
@@ -297,27 +363,42 @@ public class GameClass extends ShipSetup {
 							int x3 = currentShip.getC3().getX();
 							int y3 = currentShip.getC3().getY();
 							
-							if(compBoard[x1][y1] && compBoard[x2][y2] && compBoard[x3][y3]) {
+							Coordinate c1 = new Coordinate(x1, y1);
+							Coordinate c2 = new Coordinate(x2, y2);
+							Coordinate c3 = new Coordinate(x3, y3);
+							
+							if((compBoard[x1][y1] && compBoard[x2][y2] && compBoard[x3][y3]) && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2) && currentShip.getC3().equals(c3))) {
+								if(!hLiving.get(m)) {
+									for(int s = 0; s < hLiving.size(); s++) {
+										if(hLiving.get(s)) {
+											hLiving.set(s, false);
+											break;
+										}
+									}
+								}
+								else {
+									hLiving.set(m, false);
+								}
 								//hLiving.set(m, false);
 								//hDead.set(m, true);
 								//hDamaged.set(m, true);
-								currentShip.setStatus(false);
-								humArray.get(m).setStatus(false);
+								//currentShip.setStatus(false);
+								//humArray.get(m).setStatus(false);
 								System.out.println("The computer sunk your ship of length three!");
-								//System.out.println();
+								System.out.println();
 								System.out.println("Your stats:");
 								System.out.println(updateStatus(0));
 								System.out.println("Computer's stats:");
 								System.out.println(updateCompStatus(0));
-								//humArray.remove(m);
+								humArray.remove(m);
 								break;
 							}
 							else if(compBoard[x1][y1] || compBoard[x2][y2] || compBoard[x3][y3]) {
 								//hLiving.set(m, true);
 								//hDead.set(m, false);
 								//hDamaged.set(m, true);
-								humArray.get(m).setDamage(true);
-								currentShip.setDamage(true);
+								//humArray.get(m).setDamage(true);
+								//currentShip.setDamage(true);
 								break;
 							}
 						}
@@ -332,27 +413,44 @@ public class GameClass extends ShipSetup {
 							int x4 = currentShip.getC4().getX();
 							int y4 = currentShip.getC4().getY();
 							
-							if(compBoard[x1][y1] && compBoard[x2][y2] && compBoard[x3][y3] && compBoard[x4][y4]) {
+							Coordinate c1 = new Coordinate(x1, y1);
+							Coordinate c2 = new Coordinate(x2, y2);
+							Coordinate c3 = new Coordinate(x3, y3);
+							Coordinate c4 = new Coordinate(x4, y4);
+							
+							if((compBoard[x1][y1] && compBoard[x2][y2] && compBoard[x3][y3] && compBoard[x4][y4]) && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2) && currentShip.getC3().equals(c3) && currentShip.getC4().equals(c4))) {
+								if(!hLiving.get(m)) {
+									for(int s = 0; s < hLiving.size(); s++) {
+										if(hLiving.get(s)) {
+											hLiving.set(s, false);
+											break;
+										}
+									}
+								}
+								else {
+									hLiving.set(m, false);
+								}
+
 								//hLiving.set(m, false);
 								//hDead.set(m, true);
 								//hDamaged.set(m, true);
-								currentShip.setStatus(false);
-								humArray.get(m).setStatus(false);
+								//currentShip.setStatus(false);
+								//humArray.get(m).setStatus(false);
 								System.out.println("The computer sunk your ship of length four!");
-								//System.out.println();
+								System.out.println();
 								System.out.println("Your stats:");
 								System.out.println(updateStatus(0));
 								System.out.println("Computer's stats:");
 								System.out.println(updateCompStatus(0));
-								//humArray.remove(m);
+								humArray.remove(m);
 								break;
 							}
-							else if(compBoard[x1][y1] || compBoard[x2][y2] || compBoard[x3][y3] || compBoard[x4][y4]) {
+							else if((compBoard[x1][y1] || compBoard[x2][y2] || compBoard[x3][y3] || compBoard[x4][y4]) && (currentShip.getC1().equals(c1) && currentShip.getC2().equals(c2) && currentShip.getC3().equals(c3) && currentShip.getC4().equals(c4)) ) {
 								//hLiving.set(m, true);
 								//hDead.set(m, false);
 								//hDamaged.set(m, true);
-								humArray.get(m).setDamage(true);
-								currentShip.setDamage(true);
+								//humArray.get(m).setDamage(true);
+								//currentShip.setDamage(true);
 								break;
 							}
 						}
@@ -360,13 +458,14 @@ public class GameClass extends ShipSetup {
 					
 				}
 		    }
-			/*if(compArray.size() == 0) {
+			if(compArray.size() == 0) {
 				System.out.println("Congratulations, you sunk all the computer's ships and won!");
 				isGame = true;
 			}
 			else if(humArray.size() == 0) {
 				System.out.println("Sorry, the computer sunk all your ships. You lose!");
-			}*/
+				isGame = true;
+			}
 		}
 			/*for (int i = 0; i < round - 1; i++) {
 				while (compGuessesX.get(i) == compGuessX && compGuessesY.get(i) == compGuessY) {
@@ -390,29 +489,24 @@ public class GameClass extends ShipSetup {
 	protected static int shipChoice;
 
 	// NEW METHOD
-	int damageCount = 0;
 	int aliveCount = 0;
 	int deadCount = 0;
 	String s = "";
-	
 	private String updateStatus(int low) {
-		
+	
 		if (low == 3) {
-			s += "Alive: " + aliveCount + "\n" + "Dead: " + deadCount + "\n" + "Damaged: " + damageCount + "\n";
-			damageCount = 0;
+			s += "Alive: " + aliveCount + "\n" + "Dead: " + deadCount + "\n";
 			aliveCount = 0;
 			deadCount = 0;
 			return s;
 			
 		} else {
 			s = "";
-			if (humArray.get(low).isAlive()) {
+			if (hLiving.get(low)) {
 				aliveCount++;
 			}
-			if (humArray.get(low).isDamaged()) {
-				damageCount++;
-			}
-			if (!humArray.get(low).isAlive()) {
+		
+			if (!hLiving.get(low)) {
 				deadCount++;
 			}
 
@@ -421,30 +515,27 @@ public class GameClass extends ShipSetup {
 		return updateStatus(low);
 
 
+
 	}
 	
-	int damageCount2 = 0;
 	int aliveCount2 = 0;
 	int deadCount2 = 0;
 	String s2 = "";
 	private String updateCompStatus(int low) {
 	
 		if (low == 3) {
-			s += "Alive: " + aliveCount2 + "\n" + "Dead: " + deadCount2 + "\n" + "Damaged: " + damageCount2 + "\n";
-			damageCount2 = 0;
+			s2 += "Alive: " + aliveCount2 + "\n" + "Dead: " + deadCount2 + "\n";
 			aliveCount2 = 0;
 			deadCount2 = 0;
 			return s2;
 			
 		} else {
-			s = "";
-			if (compArray.get(low).isAlive()) {
+			s2 = "";
+			if (living.get(low)) {
 				aliveCount2++;
 			}
-			if (compArray.get(low).isDamaged()) {
-				damageCount2++;
-			}
-			if (!compArray.get(low).isAlive()) {
+		
+			if (!living.get(low)) {
 				deadCount2++;
 			}
 
