@@ -1,12 +1,22 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 public abstract class Ship {
-	private boolean isDamaged;
-	private boolean isAlive;
-	
+	protected boolean isDamaged = false;
+	protected boolean isAlive = true;
+
 	public Ship() {
-		
+
 	}
-	
+
 	public abstract boolean isDamaged();
+
 	public abstract boolean isAlive();
-	
+
+	public abstract int getSize();
+
+	public abstract void setDamage(boolean status);
+
+	public abstract void setStatus(boolean status);
+
 }
