@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * Subclass to superclass Coordinate
  * 
- * @author khanhthyle
+ * @author Project Battleship
  *
  */
 public class ShipSetup extends Coordinate {
