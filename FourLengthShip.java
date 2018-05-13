@@ -1,5 +1,7 @@
 /**
  * Subclass to superclass Ship, creates a ship with length of four
+ * 
+ * @author Project Battleship
  */
 public class FourLengthShip extends Ship {
 	Coordinate c1;
