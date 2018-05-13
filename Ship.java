@@ -2,6 +2,8 @@
 /**
  * Abstract class to set a template to make a ship Two boolean variables to
  * check if the ship is hit or sunk
+ * 
+ * @author Project Battleship
  *
  */
 import java.util.ArrayList;
