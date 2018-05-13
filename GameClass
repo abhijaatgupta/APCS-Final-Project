@@ -2,6 +2,8 @@ import java.util.*;
 
 /**
  * Subclass of superclass ShipSetup
+ * 
+ * @author Project Battleship
  */
 public class GameClass extends ShipSetup {
 	// ArrayLists for the x and y coordinate of computer guesses
