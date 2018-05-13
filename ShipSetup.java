@@ -1,6 +1,15 @@
 import java.util.*;
 
+/**
+ * Subclass to superclass Coordinate
+ * 
+ * @author khanhthyle
+ *
+ */
 public class ShipSetup extends Coordinate {
+	// instance variables of ArrayLists for the computer's ships, player's
+	// ships, computer's coordinates, player's coordinates, and the coordinate
+	// list
 	public static ArrayList<Ship> compArray = new <Ship>ArrayList(); // NEW
 	public static ArrayList<Ship> humArray = new <Ship>ArrayList(); // NEW
 	public static ArrayList<Integer> compX = new <Integer>ArrayList(); // NEW
@@ -23,12 +32,19 @@ public class ShipSetup extends Coordinate {
 	}
 
 	/**
-	 * Creates an 8 by 8 board to play on
+	 * Creates an 8 by 8 plane to play game on
 	 */
 	boolean[][] board = new boolean[8][8];
 
 	/**
-	 * Creates computer's ships and places them on the board
+	 * This method Creates computer's ships and places them on the board. The
+	 * computer's ships are randomly placed with the amount of coordinates
+	 * dependent on a random generator. For each ship created by the computer,
+	 * its coordinates for that ship will be be either the adjacent coordinates
+	 * vertical or horizontal of the random point. While placing the points for
+	 * the randomly generated ships, the computer also checks if the coordinates
+	 * of the ship overlaps, avoiding that by repeating the ship placement if it
+	 * occurs.
 	 */
 	public static void computer() {
 		Ship compShip = null;
@@ -159,8 +175,13 @@ public class ShipSetup extends Coordinate {
 	}
 
 	/**
-	 * Creates a two length ship for the player with the coordinates of their
-	 * choice
+	 * Method that creates a two length ship for the player with the coordinates
+	 * of their choice. The method asks for a user input of the points, being
+	 * wary if the player chooses a point that overlaps one that is already
+	 * placed. If so, the user is prompted to choose another coordinate. If the
+	 * player chooses a point out of bounds (beyond the plane) they must choose
+	 * another coordinate. If the coordinates are valid, the user is prompted to
+	 * add coordinates for the next ship.
 	 */
 	public static void humanSetupFor2Ship() {
 		int currentRound = 1;
@@ -245,9 +266,15 @@ public class ShipSetup extends Coordinate {
 		}
 
 	}
+
 	/**
-	 * Creates a three length ship for the player with the coordinates of their
-	 * choice
+	 * Method that creates a three length ship for the player with the
+	 * coordinates of their choice. The method asks for a user input of the
+	 * points, being wary if the player chooses a point that overlaps one that
+	 * is already placed. If so, the user is prompted to choose another
+	 * coordinate. If the player chooses a point out of bounds (beyond the
+	 * plane) they must choose another coordinate. If the coordinates are valid,
+	 * the user is prompted to add coordinates for the next ship.
 	 */
 	public static void humanSetupFor3Ship() {
 		ThreeLengthShip ship;
@@ -345,9 +372,15 @@ public class ShipSetup extends Coordinate {
 		}
 
 	}
+
 	/**
-	 * Creates a four length ship for the player with the coordinates of their
-	 * choice
+	 * Method that creates a two length ship for the player with the coordinates
+	 * of their choice. The method asks for a user input of the points, being
+	 * wary if the player chooses a point that overlaps one that is already
+	 * placed. If so, the user is prompted to choose another coordinate. If the
+	 * player chooses a point out of bounds (beyond the plane) they must choose
+	 * another coordinate. If the coordinates are valid, the user is prompted to
+	 * add coordinates for the next ship.
 	 */
 	public static void humanSetupFor4Ship() {
 		Scanner scan = new Scanner(System.in);
