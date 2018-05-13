@@ -1,3 +1,6 @@
+/**
+ * Subclass to superclass Ship, creates a ship with length of four
+ */
 public class FourLengthShip extends Ship {
 	Coordinate c1;
 	Coordinate c2;
@@ -25,9 +28,9 @@ public class FourLengthShip extends Ship {
 
 	@Override
 	/**
-	 * Boolean to check if ship is damaged
+	 * Boolean method to check if ship is damaged
 	 * 
-	 * @return true if a coordinate has been guessed (ship is damaged), false if
+	 * @return boolean - true if a coordinate has been guessed (ship is damaged), false if
 	 *         not
 	 */
 	public boolean isDamaged() {
@@ -43,9 +46,9 @@ public class FourLengthShip extends Ship {
 
 	@Override
 	/**
-	 * Boolean to check if ship is alive
+	 * Boolean method to check if ship is alive
 	 * 
-	 * @return true if all coordinates have not been guessed, false if not
+	 * @return boolean - true if all coordinates have not been guessed, false if not
 	 */
 	public boolean isAlive() {
 		if (c1.isDamaged() || c2.isDamaged() || c3.isDamaged() || c4.isDamaged()) {
@@ -104,7 +107,7 @@ public class FourLengthShip extends Ship {
 
 	@Override
 	/**
-	 * Sets status for ship
+	 * Sets status for ship if alive or not
 	 */
 	public void setStatus(boolean status) {
 		isAlive = status;
@@ -113,7 +116,7 @@ public class FourLengthShip extends Ship {
 
 	@Override
 	/**
-	 * Sets damage for ship
+	 * Sets damage for ship status
 	 */
 	public void setDamage(boolean status) {
 		isDamaged = status;
