@@ -12,28 +12,27 @@ public abstract class Ship {
 	protected boolean isAlive = true;
 
 	/**
-	 * Constructor for Ship
+	 * Default constructor for Ship
 	 */
 	public Ship() {
-
 	}
 
 	/**
-	 * Checks if ship is damaged
+	 * Boolean method to check if ship is damaged
 	 * 
-	 * @return true if damaged, false if not
+	 * @return boolean - true if damaged, false if not
 	 */
 	public abstract boolean isDamaged();
 
 	/**
-	 * Checks if ship is alive
+	 * Boolean method to check if ship is alive
 	 * 
-	 * @return true if alive, false if not
+	 * @return boolean - true if alive, false if not
 	 */
 	public abstract boolean isAlive();
 
 	/**
-	 * Getter method for ship size
+	 * Getter method to get ship size
 	 * 
 	 * @return ship size
 	 */
