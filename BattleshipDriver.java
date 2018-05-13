@@ -1,9 +1,11 @@
 import java.util.*;
 
+/**
+ * Driver class to test and run Battleship
+ */
 public class BattleshipDriver {
 	/**
-	 * Creates a GameClass method to run the Battleship game
-	 * 
+	 * Creates a GameClass object to test and run the Battleship simulation
 	 * @param args
 	 *            - args
 	 */
