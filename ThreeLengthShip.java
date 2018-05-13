@@ -4,7 +4,7 @@ public class ThreeLengthShip extends Ship {
 	Coordinate c3;
 
 	/**
-	 * Creates a four length ship with four coordinates
+	 * Creates a three length ship with three coordinates
 	 * 
 	 * @param c1
 	 *            - first coordinate
