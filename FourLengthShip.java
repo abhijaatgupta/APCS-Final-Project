@@ -12,7 +12,11 @@ public class FourLengthShip extends Ship {
 	}
 	@Override
 	public boolean isDamaged() {
-		if((c1.isDamaged() || c2.isDamaged() || c3.isDamaged() || c4.isDamaged()) && (!isAlive())) {
+		if((c1.isDamaged() || c2.isDamaged() || c3.isDamaged() || c4.isDamaged())) {
+			return true;
+		}
+		else if(c1.isDamaged() && c2.isDamaged() && c3.isDamaged() && c4.isDamaged()) {
+			setStatus(false);
 			return true;
 		}
 		else{
@@ -22,12 +26,39 @@ public class FourLengthShip extends Ship {
 
 	@Override
 	public boolean isAlive() {
-		if(c1.isDamaged() && c2.isDamaged() && c3.isDamaged() && c4.isDamaged()) {
+		if(c1.isDamaged() || c2.isDamaged() || c3.isDamaged() || c4.isDamaged()) {
+			return true;
+		}
+		else if(!c1.isDamaged() && !c2.isDamaged() && !c3.isDamaged() && !c4.isDamaged()) {
 			return true;
 		}
 		else {
 			return false;
 		}
 	}
-
+	public int getSize() {
+		return 4;
+	}
+	public Coordinate getC1() {
+		return c1;
+	}
+	public Coordinate getC2() {
+		return c2;
+	}
+	public Coordinate getC3() {
+		return c3;
+	}
+	public Coordinate getC4() {
+		return c4;
+	}
+	@Override
+	public void setStatus(boolean status) {
+		isAlive = status;
+		
+	}
+	@Override
+	public void setDamage(boolean status) {
+		isDamaged = status;
+		
+	}
 }
