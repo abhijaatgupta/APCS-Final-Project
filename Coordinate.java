@@ -1,19 +1,16 @@
+/**
+ * Coordinate class to set up coordinates of the ship
+ * 
+ * @author Project Battleship
+ *
+ */
 public class Coordinate {
 
-	// private instance variables
 	private int x; // x coordinate of ship
 	private int y; // y coordinate of ship
 	private int size; // battleship size
 	private boolean damage = false; // has the ship taken a hit?
 
-	/**
-	 * Constructor for coordinate of ship, creates a coordinate object
-	 * 
-	 * @param x
-	 *            - x coordinate of the ship
-	 * @param y
-	 *            - y coordinate of the ship
-	 */
 	public Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -21,43 +18,39 @@ public class Coordinate {
 	}
 
 	/**
-	 * Getter method for the x coordinate of the ship
 	 * 
-	 * @return x - the x coordinate of the ship
+	 * @return x: the x coordinate of the ship
 	 */
 	public int getX() {
 		return x;
 	}
 
 	/**
-	 * Getter method for y coordinate of the ship
 	 * 
-	 * @return y- the y coordinate of the ship
+	 * @return y: the y coordinate of the ship
 	 */
 	public int getY() {
 		return y;
 	}
 
 	/**
-	 * Getter method for size of ship
 	 * 
-	 * @return size - size of the ship
+	 * @return getSize: the size of the ship
 	 */
 	public int getSize() {
 		return size;
 	}
 
 	/**
-	 * Boolean method to check whether the ship has been hit or not
-	 * 
-	 * @return damage - boolean if the ship has been hit
+	 * @return damage: boolean if the ship has been hit
 	 */
 	public boolean isDamaged() {
 		return damage;
 	}
 
 	/**
-	 * Sets ship status to damage if ship has been hit
+	 * 
+	 * the damage will be set to true has been hit
 	 */
 	public void setDamage(boolean status) {
 		damage = status;
